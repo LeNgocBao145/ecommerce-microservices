@@ -24,7 +24,7 @@ namespace eCommerce.SharedLibrary.DependencyInjection
                 .WriteTo.Debug()
                 .WriteTo.File(path: $"{fileName}-.text",
                 restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
-                outputTemplate: "{}",
+                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {message:lj}{NewLine}{Exception}",
                 rollingInterval: RollingInterval.Day
                 ).CreateLogger();
 
@@ -33,8 +33,6 @@ namespace eCommerce.SharedLibrary.DependencyInjection
         }
         public static IApplicationBuilder UseSharedPolicies(this IApplicationBuilder app)
         {
-            app.UseMiddleware<GlobalException>();
-
             app.UseMiddleware<ListenToOnlyApiGateway>();
 
             return app;
