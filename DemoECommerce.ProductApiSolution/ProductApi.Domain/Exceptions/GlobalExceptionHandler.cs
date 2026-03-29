@@ -12,17 +12,17 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
         Exception exception,
         CancellationToken cancellationToken)
     {
-        logger.LogError(exception, "Bảo ơi, có lỗi xảy ra tại {Path}! Nội dung: {Message}",
+        logger.LogError(exception, "An error occurred at {Path}! Message: {Message}",
             httpContext.Request.Path, exception.Message);
 
         var (status, title) = exception switch
         {
             ProductNotFoundException => (StatusCodes.Status404NotFound, "Not Found"),
+            ProductOperationException => (StatusCodes.Status500InternalServerError, "Operation Failed"),
             UnauthorizedAccessException => (StatusCodes.Status401Unauthorized, "Unauthorized"),
             _ => (StatusCodes.Status500InternalServerError, "Internal Server Error")
         };
 
-        // 3. Trả về kết quả JSON chuẩn ProblemDetails
         httpContext.Response.StatusCode = status;
         await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
         {
@@ -31,6 +31,6 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
             Detail = exception.Message
         }, cancellationToken);
 
-        return true; // Xác nhận đã xử lý xong lỗi này
+        return true;
     }
 }

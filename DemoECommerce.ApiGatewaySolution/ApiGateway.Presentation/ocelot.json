@@ -55,9 +55,9 @@
     },
     // Authentication
     {
-      "UpstreamHttpMethod": [ "Get" ],
-      "UpstreamPathTemplate": "/authentication",
-      "DownstreamPathTemplate": "/api/authentication",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "UpstreamPathTemplate": "/authentication/{everything}",
+      "DownstreamPathTemplate": "/api/authentication/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -66,6 +66,7 @@
         }
       ],
       "RateLimitOptions": {
+        "ClientIdHeader": "ClientId",
         "Limit": 1,
         "Period": "30s",
         "EnableRateLimiting": true,

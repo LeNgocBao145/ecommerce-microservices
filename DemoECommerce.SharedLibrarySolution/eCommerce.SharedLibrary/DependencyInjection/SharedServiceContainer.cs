@@ -1,5 +1,4 @@
-﻿
-using eCommerce.SharedLibrary.Middlewares;
+﻿using eCommerce.SharedLibrary.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

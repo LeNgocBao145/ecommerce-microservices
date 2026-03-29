@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OrderApi.Domain.Entities
+﻿namespace OrderApi.Domain.Entities
 {
-    internal class Order
+    public class Order
     {
+        public Guid Id { get; set; }
+        public Guid ProductId { get; set; }
+        public Guid ClientId { get; set; }
+        public int PurchaseQuantity { get; set; }
+        public DateTime OrderedDate { get; set; } = DateTime.UtcNow;
     }
 }

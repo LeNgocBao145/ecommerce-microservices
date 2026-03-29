@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AuthenticationApi.Application.DTOs;
 
 namespace AuthenticationApi.Application.Interfaces
 {
-    internal interface IUserService
+    public interface IUserService
     {
+        Task<UserResponseDTO> Register(UserRequestDTO user);
+        Task<LoginResponseDTO> Login(LoginRequestDTO loginRequest);
+        Task<UserResponseDTO> GetUserById(Guid id);
     }
 }

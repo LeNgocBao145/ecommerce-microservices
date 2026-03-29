@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OrderApi.Application.DTOs;
 
 namespace OrderApi.Application.Interfaces
 {
-    internal interface IOrderService
+    public interface IOrderService
     {
+        Task<IEnumerable<OrderResponseDTO>> GetOrdersByClientId(Guid clientId);
+        Task<OrderDetailsDTO> GetOrderDetails(Guid orderId);
     }
 }

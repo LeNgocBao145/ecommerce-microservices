@@ -2,13 +2,13 @@
 
 namespace ProductApi.Application.DTOs
 {
-    public class ProductRequestDTO
-    {
+    public record ProductRequestDTO
+    (
         [Required, MaxLength(255)]
-        public string Name { get; set; }
+        string Name,
         [Required, DataType(DataType.Currency)]
-        public decimal Price { get; set; }
+        decimal Price,
         [Required, Range(0, int.MaxValue)]
-        public int Quantity { get; set; }
-    }
+        int Quantity
+    );
 }

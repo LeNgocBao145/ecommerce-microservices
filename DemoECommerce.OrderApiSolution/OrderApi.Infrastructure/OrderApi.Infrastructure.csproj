@@ -10,9 +10,4 @@
     <ProjectReference Include="..\OrderApi.Application\OrderApi.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistence\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

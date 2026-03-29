@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AuthenticationApi.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthenticationApi.Infrastructure.Persistence
 {
-    internal class UserDbContext
+    public class UserDbContext(DbContextOptions<UserDbContext> options) : DbContext(options)
     {
+        public DbSet<User> Users { get; set; }
     }
 }

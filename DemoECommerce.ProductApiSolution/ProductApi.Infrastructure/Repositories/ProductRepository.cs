@@ -28,29 +28,30 @@ namespace ProductApi.Infrastructure.Repositories
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            IEnumerable<Product> products = await context.Products.AsNoTracking().ToListAsync();
-            return products;
+            return await context.Products.AsNoTracking().ToListAsync();
         }
 
         public async Task<Product?> GetByAsync(Expression<Func<Product, bool>> predicate)
         {
-            return await context.Products.Where(predicate).FirstOrDefaultAsync();
+            return await context.Products.Where(predicate).AsNoTracking().FirstOrDefaultAsync();
         }
 
-        public async Task<int> UpdateAsync(Product entity)
+        public async Task<Product?> UpdateAsync(Product entity)
         {
             //var product = FindByIdAsync(entity.Id);
             //context.Entry(product).State = EntityState.Detached;
             //context.Products.Update(entity);
-            //return await context.SaveChangesAsync();
+            //return await context.SaveChangesAsync();            
 
-            return await context.Products
+            var rowsAffected = await context.Products
                 .Where(product => product.Id == entity.Id)
                 .ExecuteUpdateAsync(product => product
                     .SetProperty(p => p.Name, entity.Name)
                     .SetProperty(p => p.Quantity, entity.Quantity)
                     .SetProperty(p => p.Price, entity.Price)
                 );
+
+            return rowsAffected > 0 ? entity : null;
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AuthenticationApi.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace AuthenticationApi.Domain.Interfaces
 {
-    internal interface IUserRepository
+    public interface IUserRepository
     {
+        Task<User> CreateAsync(User entity);
+        Task<User?> FindByIdAsync(Guid id);
+        Task<User?> GetByAsync(Expression<Func<User, bool>> predicate);
     }
 }
